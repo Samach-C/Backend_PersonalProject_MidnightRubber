@@ -50,6 +50,7 @@ module.exports.register = async(req, res, next) => {
 }
 
 module.exports.login = async(req, res, next) => {
+    console.log("hello login")
     const { email, password} = req.body
     try {
         if(!(email.trim() && password.trim())) {
