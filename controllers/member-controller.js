@@ -6,12 +6,16 @@ module.exports.listMember = async(req, res, next) => {
             select: {
                 id: true,
                 email: true,
+                firstName: true,
+                lastName: true,
                 role: true,
+                createdAt: true,
                 updatedAt: true,
             }
         })
         res.json(member)
     } catch (err) {
+        console.log(err)
         next(err)        
     }
 }
@@ -31,6 +35,7 @@ module.exports.updateMember = async(req, res, next) => {
         console.log(role)
         res.json({ message: "Update Success"})
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }
@@ -46,6 +51,7 @@ module.exports.removeMember = async(req, res, next) => {
         console.log(memberId)
         res.json({ message: "Delete Success"})
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }

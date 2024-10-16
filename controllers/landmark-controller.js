@@ -1,5 +1,6 @@
 const prisma = require("../config/prisma")
 
+
 module.exports.createLandmark = async(req, res, next) => {
     // console.log(req.user, "hi")
     try {
@@ -24,9 +25,20 @@ module.exports.createLandmark = async(req, res, next) => {
 
 module.exports.listLandmark = async(req, res, next) => {
     try {
-        const landmark = await prisma.post.findMany()
+        const landmark = await prisma.post.findMany({
+            select: {
+                id: true,
+                title: true,
+                detail: true,
+                createdAt: true,
+                updatedAt: true,
+                lat: true,
+                lng: true,
+            }
+        })
         res.json(landmark)
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }
@@ -35,9 +47,9 @@ module.exports.updateLandmark = async(req, res, next) => {
     try {
         const { landmarkId } = req.params
         const { title, detail, lat, lng } = req.body
-        const landmark = await prisma.user.update({
+        const landmark = await prisma.post.update({
             where : {
-                id: Number(landmarkId)
+                id: parseInt(landmarkId)
             },
             data: {
                 title : title,
@@ -46,9 +58,9 @@ module.exports.updateLandmark = async(req, res, next) => {
                 lng: lng
             }
         })
-        console.log(data)
-        res.json({ message: "Update Success"})
+        res.json(landmark)
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }
@@ -56,7 +68,7 @@ module.exports.updateLandmark = async(req, res, next) => {
 module.exports.removeLandmark = async(req, res, next) => {
     try {
         const { landmarkId } = req.params
-        const landmark = await prisma.user.delete({
+        const landmark = await prisma.post.delete({
             where: {
                 id: Number(landmarkId),
             }
@@ -67,3 +79,5 @@ module.exports.removeLandmark = async(req, res, next) => {
         next(err)
     }
 }
+
+

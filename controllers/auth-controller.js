@@ -50,7 +50,7 @@ module.exports.register = async(req, res, next) => {
 }
 
 module.exports.login = async(req, res, next) => {
-    console.log("hello login")
+    // console.log("hello login")
     const { email, password} = req.body
     try {
         if(!(email.trim() && password.trim())) {
@@ -87,10 +87,12 @@ module.exports.login = async(req, res, next) => {
 
 module.exports.currentUser = async(req, res, next) => {
     try {
-        const email = req.user.user.email
+        // console.log('req.user', req.user)
+        const {id} = req.user
+
         const member = await prisma.user.findFirst({
             where: {
-                email: email
+                id
             },
             select : {
                 id: true,
@@ -101,6 +103,7 @@ module.exports.currentUser = async(req, res, next) => {
         console.log(member)
         res.json({ member })
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }

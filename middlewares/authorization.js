@@ -6,7 +6,7 @@ module.exports.auth = (req, res, next) => {
     // Step1 Check headers
     const authHeader = req.headers.authorization;
     // ถ้าไม่มี token ส่งมากับ header
-    console.log(authHeader)
+    // console.log("authHeader-===", authHeader)
     if (!authHeader) {
       return createError(400, "Token missing");
     }
@@ -22,6 +22,7 @@ module.exports.auth = (req, res, next) => {
         // console.log(d)
       // step3 Next
       req.user = decode;
+      console.log('decode===', decode)
       next();
     });
   } catch (err) {
