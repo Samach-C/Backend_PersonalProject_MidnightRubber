@@ -2,9 +2,9 @@ const prisma = require("../config/prisma")
 
 
 module.exports.createLandmark = async(req, res, next) => {
-    console.log(req.user, "hi")
+    // console.log(req.user, "hi")
     try {
-        console.log("here", req.body)
+        // console.log("here", req.body)
 
         const landmark = await prisma.post.create({
             data: {
