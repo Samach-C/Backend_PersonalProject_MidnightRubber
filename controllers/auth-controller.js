@@ -62,7 +62,7 @@ module.exports.login = async(req, res, next) => {
                 email: email
             }
         })
-        console.log(findUser)
+        console.log("findUserrr",findUser)
 
         if(!findUser) {
             createError(400, "Invalid Login")
@@ -81,6 +81,7 @@ module.exports.login = async(req, res, next) => {
         const { password : pw, createAt, updateAt, ...userData} = findUser
         res.json({token : token, user: userData})
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }
