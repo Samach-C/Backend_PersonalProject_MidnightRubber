@@ -11,9 +11,9 @@ const handleError = require("./middlewares/error-middleware")
 const notFoundHandler = require("./middlewares/not-found")
 
 
-app.use(morgan("dev"))
-app.use(express.json())
-app.use(cors())
+app.use(morgan("dev")) // บันทึกข้อมูลของ HTTP requests ใน Express เพื่อช่วยในการ debug, monitoring และ logging ระบบ
+app.use(express.json()) // ใช้สำหรับแปลงข้อมูล JSON ที่ถูกส่งมาผ่าน HTTP request body ให้เป็น JavaScript object
+app.use(cors()) // เชื่อมระหว่างfrontกับBack จะอนุญาตให้ทุกโดเมนส่ง request ข้ามโดเมนไปยังเซิร์ฟเวอร์ได้ ใช้เพื่อแก้ปัญหาที่เกิดจากการร้องขอข้ามโดเมนที่ถูกบล็อคในเว็บแอปพลิเคชัน
 
 app.use("/", authRoute)
 app.use("/", memberRoute)
